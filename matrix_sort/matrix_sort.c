@@ -46,7 +46,7 @@ int num_ceofficients(int m, int n, double matrix[m][n], int start_row, int col) 
 void matrix_sort(int m, int n, double matrix[m][n]) {
     int count = 0;
     int num_coef = 0;
-    for (int j=0; j<n; j++) {
+    for (int j=0; j<n-1; j++) {
         num_coef += num_ceofficients(m, n, matrix, count, j);
         while (!check_sorted(m, n, matrix, count, j)) {
             implement_sort(m, n, matrix, count, j);
