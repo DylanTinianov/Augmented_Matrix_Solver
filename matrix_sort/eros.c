@@ -7,6 +7,13 @@ void addition_ero(int m, int n, double matrix[m][n], int add, int add_to) {
     }
 }
 
+void subtract_ero(int m, int n, double matrix[m][n], int sub, int sub_to) {
+    for (int i=0; i<3; i++) {
+        matrix[sub_to][i] -= matrix[sub][i];
+    }
+}
+
+
 void scalar_mult_ero(int m, int n, double matrix[m][n], int row, double scalar) {
     for (int i=0; i<n; i++) {
         matrix[row][i] *= scalar;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA2EB5931DD4E4C900B31E43 /* rref.c in Sources */ = {isa = PBXBuildFile; fileRef = DA2EB5911DD4E4C900B31E43 /* rref.c */; };
 		DAA5C3A31DD2A36F0083726E /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = DAA5C3A11DD2A36F0083726E /* utils.c */; };
 		DAA5C3A71DD2A4570083726E /* main_test.c in Sources */ = {isa = PBXBuildFile; fileRef = DAA5C3A51DD2A4570083726E /* main_test.c */; };
 		DADA1AD61DC97567002E4FE6 /* matrix_sort.c in Sources */ = {isa = PBXBuildFile; fileRef = DADA1AD51DC97567002E4FE6 /* matrix_sort.c */; };
@@ -26,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DA2EB5911DD4E4C900B31E43 /* rref.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rref.c; sourceTree = "<group>"; };
+		DA2EB5921DD4E4C900B31E43 /* rref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rref.h; sourceTree = "<group>"; };
 		DAA5C3A11DD2A36F0083726E /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		DAA5C3A21DD2A36F0083726E /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		DAA5C3A41DD2A4110083726E /* matrix_sort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = matrix_sort.h; sourceTree = "<group>"; };
@@ -67,6 +70,8 @@
 			isa = PBXGroup;
 			children = (
 				DAA5C3A51DD2A4570083726E /* main_test.c */,
+				DA2EB5911DD4E4C900B31E43 /* rref.c */,
+				DA2EB5921DD4E4C900B31E43 /* rref.h */,
 				DADA1AD51DC97567002E4FE6 /* matrix_sort.c */,
 				DAA5C3A41DD2A4110083726E /* matrix_sort.h */,
 				DAA5C3A11DD2A36F0083726E /* utils.c */,
@@ -133,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2EB5931DD4E4C900B31E43 /* rref.c in Sources */,
 				DAA5C3A71DD2A4570083726E /* main_test.c in Sources */,
 				DAA5C3A31DD2A36F0083726E /* utils.c in Sources */,
 				DADA1ADE1DC982F7002E4FE6 /* eros.c in Sources */,
