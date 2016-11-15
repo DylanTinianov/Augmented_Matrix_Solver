@@ -17,5 +17,6 @@
 #include <math.h>
 
 void rref(int m, int n, double matrix[m][n]);
+int consistent(int m, int n, double matrix[m][n]);
 
 #endif /* rref_h */

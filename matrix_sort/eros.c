@@ -2,20 +2,20 @@
 
 
 void addition_ero(int m, int n, double matrix[m][n], int add, int add_to) {
-    for (int i=0; i<3; i++) {
+    for (int i=0; i < n; i++) {
         matrix[add_to][i] += matrix[add][i];
     }
 }
 
 void subtract_ero(int m, int n, double matrix[m][n], int sub, int sub_to) {
-    for (int i=0; i<3; i++) {
+    for (int i=0; i < n; i++) {
         matrix[sub_to][i] -= matrix[sub][i];
     }
 }
 
 
 void scalar_mult_ero(int m, int n, double matrix[m][n], int row, double scalar) {
-    for (int i=0; i<n; i++) {
+    for (int i=0; i < n; i++) {
         matrix[row][i] *= scalar;
     }
 }
