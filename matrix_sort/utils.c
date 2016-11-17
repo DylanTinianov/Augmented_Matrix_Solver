@@ -12,9 +12,9 @@ void matrix_print(int m, int n, double matrix[m][n]) {
     }
 }
 
-int row_of_zero(int m, int n, double matrix[m][n]) {
+int row_of_zero(int m, int n, double matrix[m][n], int check_row) {
     for (int j = 0; j < n-1; j++) {
-        if (matrix[m][j] != 0) return 0;
+        if (matrix[check_row][j] != 0) return 0;
         
     }
     return 1;
