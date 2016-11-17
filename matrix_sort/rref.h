@@ -18,5 +18,7 @@
 
 void rref(int m, int n, double matrix[m][n]);
 int consistent(int m, int n, double matrix[m][n]);
+int check_unique(int m, int n, double matrix[m][n]);
+double* get_solution(int m, int n, double matrix[m][n]);
 
 #endif /* rref_h */

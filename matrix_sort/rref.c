@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include <math.h>
 #include "eros.h"
 #include "utils.h"
@@ -61,11 +62,41 @@ int consistent(int m, int n, double matrix[m][n]) {
     return 1;
 }
 
-void* get_solution(int m, int n, double matrix[m][n]) {
+int check_unique(int m, int n, double matrix[m][n]){
+    int num_count = 0;
+    for (int i = 0; i < n-1; i++){
+        
+        for (int j = 0; j < m; j++){
+            if (matrix[j][i] != 0) num_count++;
+        }
+        if (num_count != 1) return 0;
+        
+        num_count = 0;
+    }
+    return 1;
+}
+
+double* get_solution(int m, int n, double matrix[m][n]) {
     // check for unique solution in square matrix (m == n-1)
         // Check that it's consistant
         // Check that only main diagonal has coefficients and = 1
     
     // Pull out solution
+    
+    
+    if (consistent(m, n, matrix)){
+        double *solution = malloc((n-1)*sizeof(double));
+        assert(solution);
+        
+        if (check_unique(m, n, matrix)){
+            for (int i = 0; i < m; i++){
+                solution[i] = matrix[i][n-1];
+            }
+            return solution;
+        }
+    }
+    
     return NULL;
 }
+
+
