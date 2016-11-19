@@ -10,7 +10,13 @@
 
 int main(void) {
     int m = 5, n = 6;
-    double matrix1[5][6] = {
+    
+    double* *matrix2 = malloc(sizeof(double*)*m);
+    for (int i=0; i < m; i++) {
+        matrix2[i] = calloc(n, sizeof(double));
+    }
+    
+    double matrix_set[5][6] = {
         {1, 0, 0, 0, 0, 4},
         {0, 0, 0, 0, 0, 0},
         {0, 0, 1, 0, 0, 3},
@@ -18,36 +24,42 @@ int main(void) {
         {0, 0, 0, 0, 1, 0},
     };
     
-    // initialize solution array to all 0
-    double sln[m][n];
     for (int i=0; i < m; i++) {
-        for (int j=0; j < n; j++) {
-            sln[i][j] = 0;
+        for(int j=0; j < n; j++) {
+            set_matrix(matrix2, i, j, matrix_set[i][j]);
         }
+    }
+
+
+    // initialize solution array to all 0
+    
+    double* *sln = malloc(sizeof(double*)*m);
+    for (int i=0; i < m; i++) {
+        sln[i] = calloc(n, sizeof(double));
     }
     
     
-    
-    rref(m, n, matrix1);
-    matrix_print(m, n, matrix1);
+    rref(m, n, matrix2);
+    matrix_print(m, n, matrix2);
     printf("__________________\n");
     
     
     
-    double *solution = get_solution(m, n, matrix1);
+    double *solution = get_solution(m, n, matrix2);
     if (solution != NULL) {
         for (int i= 0; i < m; i++){
             printf("%g\n", solution[i]);
         }
         free(solution);
     }
-    else if (consistent(m, n, matrix1)) {
+    else if (consistent(m, n, matrix2)) {
         // print infinite sln.
-        get_infinite(m, n, matrix1, sln);
+        get_infinite(m, n, matrix2, sln);
         matrix_print(m, n, sln);
     }
     else printf("NO SOLUTION");
-    
+
     
     return 0;
+
 }

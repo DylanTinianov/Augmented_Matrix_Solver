@@ -7,10 +7,10 @@
 #include "utils.h"
 
 
-int check_sorted(int m, int n, double matrix[m][n], int start_row, int col);
-void implement_sort(int m, int n, double matrix[m][n], int start_row, int col);
-int num_ceofficients(int m, int n, double matrix[m][n], int start_row, int col);
-void matrix_sort(int m, int n, double matrix[m][n]);
+int check_sorted(int m, int n, double* *matrix, int start_row, int col);
+void implement_sort(int m, int n, double* *matrix, int start_row, int col);
+int num_ceofficients(int m, int n, double* *matrix, int start_row, int col);
+void matrix_sort(int m, int n, double* *matrix);
 
 
 

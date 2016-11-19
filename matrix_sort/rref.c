@@ -14,7 +14,7 @@
 #include "matrix_sort.h"
 
 
-void rref(int m, int n, double matrix[m][n]) {
+void rref(int m, int n, double* *matrix) {
     int start_row = 0;
     matrix_sort(m, n, matrix);
     
@@ -58,7 +58,7 @@ void rref(int m, int n, double matrix[m][n]) {
     }
 }
 
-int consistent(int m, int n, double matrix[m][n]) {
+int consistent(int m, int n, double* *matrix) {
     // return 1 if consistent, else 0
     for (int i=0; i < m; i++) {
         if(row_of_zero(m, n, matrix, i)){
@@ -68,7 +68,7 @@ int consistent(int m, int n, double matrix[m][n]) {
     return 1;
 }
 
-int check_unique(int m, int n, double matrix[m][n]){
+int check_unique(int m, int n, double* *matrix){
     int num_count = 0;
     for (int i = 0; i < n-1; i++){
         
@@ -83,7 +83,7 @@ int check_unique(int m, int n, double matrix[m][n]){
 }
 
 
-void get_infinite(int m, int n, double matrix[m][n], double sln[m][n]) {
+void get_infinite(int m, int n, double* *matrix, double* *sln) {
     int coef_count = 0;
     for (int j=0; j < n; j++) {
         for (int i=0; i < m; i++) {
@@ -99,7 +99,7 @@ void get_infinite(int m, int n, double matrix[m][n], double sln[m][n]) {
     }
 }
 
-double* get_solution(int m, int n, double matrix[m][n]) {
+double* get_solution(int m, int n, double* *matrix) {
     // check for unique solution in square matrix (m == n-1)
         // Check that it's consistant
         // Check that only main diagonal has coefficients and = 1
@@ -120,9 +120,3 @@ double* get_solution(int m, int n, double matrix[m][n]) {
     }
     return NULL;
 }
-
-
-
-
-
-
