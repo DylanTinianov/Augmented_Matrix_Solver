@@ -99,7 +99,7 @@ void get_infinite(int m, int n, double* *matrix, double* *sln) {
     }
 }
 
-double* get_solution(int m, int n, double* *matrix) {
+int get_solution(int m, int n, double* *matrix, double *solution) {
     // check for unique solution in square matrix (m == n-1)
         // Check that it's consistant
         // Check that only main diagonal has coefficients and = 1
@@ -108,15 +108,15 @@ double* get_solution(int m, int n, double* *matrix) {
     
     
     if (consistent(m, n, matrix)){
-        double *solution = malloc((n-1)*sizeof(double));
-        assert(solution);
+        //double *solution = (double*)malloc(sizeof(double)*(n-1));
+        //assert(solution);
         
         if (check_unique(m, n, matrix)){
             for (int i = 0; i < m; i++){
                 solution[i] = matrix[i][n-1];
             }
-            return solution;
+            return 1;
         }
     }
-    return NULL;
+    return 0;
 }

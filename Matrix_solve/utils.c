@@ -5,14 +5,7 @@
 
 
 // Useful Functions
-void matrix_print(int m, int n, double* *matrix) {
-    for (int i=0; i<m; i++) {
-        for (int j=0; j<n; j++) {
-            printf("%g\t", matrix[i][j]);
-        }
-        printf("\n");
-    }
-}
+
 
 int row_of_zero(int m, int n, double* *matrix, int check_row) {
     for (int j = 0; j < n-1; j++) {
