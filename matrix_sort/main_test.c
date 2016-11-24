@@ -16,8 +16,8 @@ int main(void) {
         matrix2[i] = calloc(n, sizeof(double));
     }
     
-    double matrix_set[5][6] = {
-        {1, 0, 0, 0, 0, 4},
+    double matrix_set[4][4] = {
+        {0, 1.0, 0.75, -1.77},
         {0, 0, 0, 0, 0, 0},
         {0, 0, 1, 0, 0, 3},
         {0, 0, 0, 1, 0, 3},

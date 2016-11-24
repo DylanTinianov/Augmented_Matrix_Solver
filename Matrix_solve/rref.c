@@ -13,6 +13,8 @@
 #include "utils.h"
 #include "matrix_sort.h"
 
+#define EPSILON 0.000000001
+
 
 void rref(int m, int n, double* *matrix) {
     int start_row = 0;
@@ -62,7 +64,7 @@ int consistent(int m, int n, double* *matrix) {
     // return 1 if consistent, else 0
     for (int i=0; i < m; i++) {
         if(row_of_zero(m, n, matrix, i)){
-            if (fabs(matrix[i][n-1]) != fabs(0.0)) return 0;
+            if (fabs(matrix[i][n-1]) >= EPSILON) return 0;
         }
     }
     return 1;

@@ -60,8 +60,9 @@ void setup() {
 
 double readInput(void) {
   double user_input = 0;
-  if (Serial.available() > 0) {
+  while (1) {
     user_input = Serial.parseFloat();
+    if (Serial.available() > 0) break;
   }
   return user_input;
 }
@@ -73,14 +74,10 @@ void loop() {
     
     Serial.println("Augmented Matrix Solver");
     Serial.println("Enter the number of rows: ");
-    while (m == 0) {
         m = (int)readInput();
-    }
 
     Serial.println("Enter the number of columns: ");
-    while (n == 0) {
         n = (int)readInput();
-    }
 
     double* *matrix = (double**)malloc(sizeof(double*)*m);
     for (int i=0; i < m; i++) {
@@ -97,30 +94,24 @@ void loop() {
             Serial.print(" Col ");
             Serial.print(j);
             Serial.println(": ");
-            //WHY ISNT THIS WORKING
-            while (user_input == 0) {
-                user_input = readInput();
-            }
-            if (user_input == 'z') user_input = 0;
+            
+            user_input = readInput();        
             set_matrix(matrix, i, j, user_input);
         }
     }
 
     Serial.println("Your augmented matrix:");
     matrix_print(m, n, matrix);
-        
-
-
-    // initialize solution array to all 0
+    Serial.println("");
     
     
     rref(m, n, matrix);
-    //matrix_print(m, n, matrix);
     double *solution = (double*)malloc(sizeof(double)*(n-1));
     //assert(solution);
 
     int got_solution = get_solution(m, n, matrix, solution);
 
+    
     
     if (!consistent(m, n, matrix)) Serial.println("NO SOLUTION");
     
@@ -141,15 +132,15 @@ void loop() {
         for (int i=0; i < n; i++) {
             print_infinite(m, n, sln, i);
         }
+Serial.println("");
+matrix_print(m, n, matrix);
+Serial.println("");
+matrix_print(m, n, sln);
+        
         delete_matrix(m, sln);
     }
     
-
-    matrix_print(m, n, matrix);
-    
     delete_matrix(m, matrix);
     free(solution);
-
-    
 }
 
