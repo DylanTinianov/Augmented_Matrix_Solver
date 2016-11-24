@@ -62,7 +62,7 @@ int consistent(int m, int n, double* *matrix) {
     // return 1 if consistent, else 0
     for (int i=0; i < m; i++) {
         if(row_of_zero(m, n, matrix, i)){
-            if (matrix[i][n-1] != fabs(0.0)) return 0;
+            if (fabs(matrix[i][n-1]) != fabs(0.0)) return 0;
         }
     }
     return 1;
@@ -84,6 +84,7 @@ int check_unique(int m, int n, double* *matrix){
 
 
 void get_infinite(int m, int n, double* *matrix, double* *sln) {
+    if (!consistent(m, n, matrix)) return;
     int coef_count = 0;
     for (int j=0; j < n; j++) {
         for (int i=0; i < m; i++) {
