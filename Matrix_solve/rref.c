@@ -73,12 +73,10 @@ int consistent(int m, int n, double* *matrix) {
 int check_unique(int m, int n, double* *matrix){
     int num_count = 0;
     for (int i = 0; i < n-1; i++){
-        
         for (int j = 0; j < m; j++){
-            if (matrix[j][i] != 0) num_count++;
+            if (fabs(matrix[j][i]) > EPSILON) num_count++;
         }
         if (num_count != 1) return 0;
-        
         num_count = 0;
     }
     return 1;
@@ -123,3 +121,4 @@ int get_solution(int m, int n, double* *matrix, double *solution) {
     }
     return 0;
 }
+

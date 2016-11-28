@@ -34,3 +34,4 @@ void row_swap_ero(int m, int n, double* *matrix, int row1, int row2) {
         }
     }
 }
+

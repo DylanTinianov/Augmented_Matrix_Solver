@@ -19,7 +19,7 @@ void matrix_print(int m, int n, double* *matrix) {
 }
 
 void print_infinite(int m, int n, double* *matrix, int col) {
-    int temp[n];
+    double temp[n];
     int zero_col = 1;
     for (int j=0; j<m; j++) {
         temp[j] = matrix[j][col];
@@ -54,19 +54,19 @@ void print_infinite(int m, int n, double* *matrix, int col) {
 
 
 void setup() {
-  Serial.begin(9600);
+    Serial.begin(9600);
 }
 
 
 double readInput(void) {
-  double user_input = 0;
-  while (1) {
-    user_input = Serial.parseFloat();
-    if (Serial.available() > 0) break;
-  }
-  return user_input;
+    double user_input = 0.0;
+    while (Serial.available() == 0) {
+    // pass
+    }
+    user_input = (Serial.readString()).toFloat();
+    Serial.println(user_input);
+    return user_input;
 }
-
 
 void loop() {
     int m = 0, n = 0;
@@ -84,10 +84,9 @@ void loop() {
         matrix[i] = (double*)calloc(n, sizeof(double));
     }
     
-    Serial.println("Enter matrix values, and 'z' for 0");
     for (int i=0; i < m; i++) {
         for(int j=0; j < n; j++) {
-            double user_input = 0;
+            double user_input = 0.0;
             
             Serial.print("Row ");
             Serial.print(i);
@@ -111,7 +110,6 @@ void loop() {
 
     int got_solution = get_solution(m, n, matrix, solution);
 
-    
     
     if (!consistent(m, n, matrix)) Serial.println("NO SOLUTION");
     
@@ -141,6 +139,6 @@ matrix_print(m, n, sln);
     }
     
     delete_matrix(m, matrix);
-    free(solution);
+    free(solution);   
 }
 

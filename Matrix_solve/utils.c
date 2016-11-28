@@ -11,7 +11,7 @@ int row_of_zero(int m, int n, double* *matrix, int check_row) {
     return 1;
 }
 
-void set_matrix(double* *matrix, int val_row, int val_col, int val) {
+void set_matrix(double* *matrix, int val_row, int val_col, double val) {
     matrix[val_row][val_col] = val;
 }
 

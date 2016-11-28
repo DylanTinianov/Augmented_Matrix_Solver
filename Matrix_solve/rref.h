@@ -24,3 +24,4 @@ void get_infinite(int m, int n, double* *matrix, double* *sln);
 #endif
 
 #endif /* rref_h */
+
