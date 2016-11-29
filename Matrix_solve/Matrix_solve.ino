@@ -10,7 +10,7 @@ void matrix_print(int m, int n, double* *matrix) {
     for (int i=0; i<m; i++) {
         for (int j=0; j<n; j++) {
             //printf("%g\t", matrix[i][j]);
-            Serial.print(matrix[i][j]);
+            Serial.print(matrix[i][j], 5);
             Serial.print("  ");
         }
         //printf("\n");
@@ -18,39 +18,39 @@ void matrix_print(int m, int n, double* *matrix) {
     }
 }
 
-void print_infinite(int m, int n, double* *matrix, int col) {
+int print_infinite(int m, int n, double* *matrix, int col, int first_print) {
     double temp[n];
     int zero_col = 1;
-    for (int j=0; j<m; j++) {
+    for (int j=0; j < m; j++) {
         temp[j] = matrix[j][col];
         if (temp[j]) zero_col = 0;
     }
 
 
     if (!zero_col) {
-        int first_print = 1;
-        int last_col = 0;
-        for (int i=0; i < m; i++) {
-            if (first_print) {
-                if (col != n-1) {
-                    Serial.print("x");
-                    Serial.print(i);  
-                }
-                else { 
-                    last_col = 1;
-                }
-                first_print = 0;
-                Serial.print(" ( ");
-            }
-                
-            
-            Serial.print(temp[i]);
+        int col_print = 0;
+        int first_col = 1;
+        
+        if (!first_print) {
+            Serial.print(" + "); 
+        }
+        
+        if (col != n-1) {         
+            Serial.print("x");
+            Serial.print(col); 
+        }
+        Serial.print(" ( ");
+        
+        for (int i=0; i < m; i++) {          
+            Serial.print(temp[i], 4);
             Serial.print(" ");
         }
         Serial.print(") ");
-        if (!last_col) Serial.print("+ ");
+        return 0;// has printed
     }
+    return 1;
 }
+
 
 
 void setup() {
@@ -127,13 +127,16 @@ void loop() {
       
         // print infinite sln.
         get_infinite(m, n, matrix, sln);
-        for (int i=0; i < n; i++) {
-            print_infinite(m, n, sln, i);
+
+        int first_print = 1;
+        for (int i= n-1; i >= 0; i--) {
+            first_print = print_infinite(m, n, sln, i, first_print);
         }
-Serial.println("");
-matrix_print(m, n, matrix);
-Serial.println("");
-matrix_print(m, n, sln);
+        // testing end matrix
+        Serial.println("");
+        matrix_print(m, n, matrix);
+        Serial.println("");
+        matrix_print(m, n, sln);
         
         delete_matrix(m, sln);
     }

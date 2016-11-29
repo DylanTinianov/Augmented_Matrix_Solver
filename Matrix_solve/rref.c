@@ -44,16 +44,17 @@ void rref(int m, int n, double* *matrix) {
         num_zero_rows += row_of_zero(m, n, matrix, i);
     }
     
-    
-    // get main diagonal
-    start_row = m-1-num_zero_rows;
-    for (int i=n-2; i > 0; i--) {
-        for (int j = start_row-1; j >= 0; j--) {
-            if (fabs(matrix[j][i]) != 0) {
-                double temp = matrix[j][i];
-                scalar_mult_ero(m, n, matrix, start_row, matrix[j][i]);
-                subtract_ero(m, n, matrix, start_row, j);
+    start_row = (m-1) - num_zero_rows;
+    for (int j = start_row-1; j >= 0; j--) {
+        for (int i=n-2; i > 0; i--) {
+            for (int k = j; k >= 0; k--) {
+                if (fabs(matrix[start_row][i]) > EPSILON) {
+                double temp = matrix[k][i];
+                scalar_mult_ero(m, n, matrix, start_row, matrix[k][i]);
+                subtract_ero(m, n, matrix, start_row, k);
                 scalar_mult_ero(m, n, matrix, start_row, 1.0/ temp);
+                }
+
             }
         }
         start_row --;
@@ -74,7 +75,8 @@ int check_unique(int m, int n, double* *matrix){
     int num_count = 0;
     for (int i = 0; i < n-1; i++){
         for (int j = 0; j < m; j++){
-            if (fabs(matrix[j][i]) > EPSILON) num_count++;
+            if (i != j && fabs(matrix[j][i]) > EPSILON) return 0; 
+            else if (fabs(matrix[j][i]) > EPSILON) num_count++;
         }
         if (num_count != 1) return 0;
         num_count = 0;
@@ -83,20 +85,33 @@ int check_unique(int m, int n, double* *matrix){
 }
 
 
+int col_free(int m, int n, double* *matrix, int col) {
+    for (int i=m-1; i >= 0; i--) {
+        if (matrix[i][col]) {
+            for (int j=col-1; j >= 0; j--) {
+                if (matrix[i][j] > EPSILON) return 1;
+            }
+
+            for (int j=i-1; j >= 0; j--) {
+                if (matrix[i][j] > EPSILON) return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+
 void get_infinite(int m, int n, double* *matrix, double* *sln) {
     if (!consistent(m, n, matrix)) return;
-    int coef_count = 0;
-    for (int j=0; j < n; j++) {
-        for (int i=0; i < m; i++) {
-            if (matrix[i][j] != 0) coef_count ++;
-        }
-        if (coef_count != 1 || j == n-1) {
+    
+    for (int j=n-1; j >= 0; j--) {
+        if (col_free(m, n, matrix, j) || j == n-1) {
             for (int i=0; i < m; i++) {
-                sln[i][j] = matrix[i][j];
+                if (j == n-1) sln[i][j] = matrix[i][j];
+                else sln[i][j] = -matrix[i][j];   
             }
             if (j != n-1) sln[j][j] = 1;
         }
-        coef_count = 0;
     }
 }
 
@@ -109,9 +124,6 @@ int get_solution(int m, int n, double* *matrix, double *solution) {
     
     
     if (consistent(m, n, matrix)){
-        //double *solution = (double*)malloc(sizeof(double)*(n-1));
-        //assert(solution);
-        
         if (check_unique(m, n, matrix)){
             for (int i = 0; i < m; i++){
                 solution[i] = matrix[i][n-1];
