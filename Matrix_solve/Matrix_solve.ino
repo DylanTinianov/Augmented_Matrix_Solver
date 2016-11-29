@@ -5,15 +5,15 @@
 #include "matrix_sort.h"
 #include "rref.h"
 
+#define EPSILON 0.000000001
+
 
 void matrix_print(int m, int n, double* *matrix) {
     for (int i=0; i<m; i++) {
         for (int j=0; j<n; j++) {
-            //printf("%g\t", matrix[i][j]);
             Serial.print(matrix[i][j], 5);
             Serial.print("  ");
         }
-        //printf("\n");
         Serial.println("");
     }
 }
@@ -41,8 +41,9 @@ int print_infinite(int m, int n, double* *matrix, int col, int first_print) {
         }
         Serial.print(" ( ");
         
-        for (int i=0; i < m; i++) {          
-            Serial.print(temp[i], 4);
+        for (int i=0; i < m; i++) {   
+            if (fabs(temp[i]) < EPSILON) temp[i] = fabs(temp[i]);      
+            Serial.print(temp[i], 3);
             Serial.print(" ");
         }
         Serial.print(") ");
@@ -106,7 +107,6 @@ void loop() {
     
     rref(m, n, matrix);
     double *solution = (double*)malloc(sizeof(double)*(n-1));
-    //assert(solution);
 
     int got_solution = get_solution(m, n, matrix, solution);
 
@@ -132,11 +132,13 @@ void loop() {
         for (int i= n-1; i >= 0; i--) {
             first_print = print_infinite(m, n, sln, i, first_print);
         }
-        // testing end matrix
+        
+        /* testing end matrix
         Serial.println("");
         matrix_print(m, n, matrix);
         Serial.println("");
         matrix_print(m, n, sln);
+        */
         
         delete_matrix(m, sln);
     }

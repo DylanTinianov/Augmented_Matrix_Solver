@@ -21,8 +21,6 @@ void rref(int m, int n, double* *matrix) {
     matrix_sort(m, n, matrix);
     
     for (int i=0; i < n-1; i++) {
-        //Add check if the number isnt zero ?
-        
         //Upper Triagnular Matrix
         for (int j=start_row; j < m; j++){
             if (fabs(matrix[j][i]) != 0){
@@ -116,13 +114,6 @@ void get_infinite(int m, int n, double* *matrix, double* *sln) {
 }
 
 int get_solution(int m, int n, double* *matrix, double *solution) {
-    // check for unique solution in square matrix (m == n-1)
-        // Check that it's consistant
-        // Check that only main diagonal has coefficients and = 1
-    
-    // Pull out solution
-    
-    
     if (consistent(m, n, matrix)){
         if (check_unique(m, n, matrix)){
             for (int i = 0; i < m; i++){
