@@ -23,13 +23,13 @@ void rref(int m, int n, double* *matrix) {
     for (int i=0; i < n-1; i++) {
         //Upper Triagnular Matrix
         for (int j=start_row; j < m; j++){
-            if (fabs(matrix[j][i]) != 0){
+            if (fabs(matrix[j][i]) > EPSILON){
                 scalar_mult_ero(m, n, matrix, j, 1.0 / matrix[j][i]);
             }
         }
         
         for (int j=start_row+1; j < m; j++){
-            if (fabs(matrix[j][i]) != 0){
+            if (fabs(matrix[j][i]) > EPSILON){
                 subtract_ero(m, n, matrix, start_row, j);
             }
         }

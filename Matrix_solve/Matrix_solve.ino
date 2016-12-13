@@ -1,3 +1,6 @@
+// Dylan Tinianov   20662029
+// Nader Sabahi     20672975
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "eros.h"
@@ -11,7 +14,7 @@
 void matrix_print(int m, int n, double* *matrix) {
     for (int i=0; i<m; i++) {
         for (int j=0; j<n; j++) {
-            Serial.print(matrix[i][j], 5);
+            Serial.print(matrix[i][j], 3);
             Serial.print("  ");
         }
         Serial.println("");
@@ -72,12 +75,12 @@ double readInput(void) {
 void loop() {
     int m = 0, n = 0;
 
-    
+    Serial.println("");
     Serial.println("Augmented Matrix Solver");
-    Serial.println("Enter the number of rows: ");
+    Serial.print("Enter the number of equations (rows): ");
         m = (int)readInput();
 
-    Serial.println("Enter the number of columns: ");
+    Serial.print("Enter the number of variables (columns): ");
         n = (int)readInput();
 
     double* *matrix = (double**)malloc(sizeof(double*)*m);
@@ -93,13 +96,14 @@ void loop() {
             Serial.print(i);
             Serial.print(" Col ");
             Serial.print(j);
-            Serial.println(": ");
+            Serial.print(": ");
             
             user_input = readInput();        
             set_matrix(matrix, i, j, user_input);
         }
     }
 
+    Serial.println("");
     Serial.println("Your augmented matrix:");
     matrix_print(m, n, matrix);
     Serial.println("");
@@ -116,7 +120,7 @@ void loop() {
     else if (got_solution) {
         for (int i= 0; i < n-1; i++) {
             Serial.print("x"); Serial.print(i); Serial.print(" = ");
-            Serial.println(solution[i]);
+            Serial.println(solution[i], 3);
         }
     }
     else {
@@ -132,17 +136,9 @@ void loop() {
         for (int i= n-1; i >= 0; i--) {
             first_print = print_infinite(m, n, sln, i, first_print);
         }
-        
-        /* testing end matrix
-        Serial.println("");
-        matrix_print(m, n, matrix);
-        Serial.println("");
-        matrix_print(m, n, sln);
-        */
-        
         delete_matrix(m, sln);
     }
-    
+   
     delete_matrix(m, matrix);
     free(solution);   
 }
