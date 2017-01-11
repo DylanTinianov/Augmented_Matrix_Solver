@@ -1,2 +1,2 @@
-# SE_Project
-System of Equations Solver
+# Augmented Matrix Solver
+System of linear equations solver
